@@ -1,27 +1,19 @@
 const { NotImplementedError } = require('../extensions/index.js');
 
-// const { Node } = require('../extensions/list-tree.js');
+ const { Node } = require('../extensions/list-tree.js');
 
 /**
 * Implement simple binary search tree according to task description
 * using Node from extensions
 */
-class Node {
-  constructor(value) {
-    this.value = value;
-    this.parent = null;
-    this.left = null;
-    this.right = null;
-  }
-}
 
 class BinarySearchTree {
   constructor() {
-    this.root = null;
+    this.rootElem = null;
   }
 
   root() {//throw new NotImplementedError('Not implemented');
-    return this.root;
+    return this.rootElem;
   }
 
   add(data) {//throw new NotImplementedError('Not implemented');
@@ -29,10 +21,10 @@ class BinarySearchTree {
       if(!node)
         return new Node(value);
 
-      if(node.value === value)
+      if(node.data === value)
         return node;
       
-      if(value < node.value) 
+      if(value < node.data) 
         node.left = addWithin(node.left, value);
       else
         node.right = addWithin(node.right, value);
@@ -40,7 +32,7 @@ class BinarySearchTree {
       return node;
     }
 
-    this.root = addWithin(this.root, data);
+    this.rootElem = addWithin(this.rootElem, data);
   }
 
   has(data) {//throw new NotImplementedError('Not implemented');
@@ -56,12 +48,25 @@ class BinarySearchTree {
         searchWithin(node.right, value);
     }
 
-    return searchWithin(this.root, data);
+    return searchWithin(this.rootElem, data);
   }
 
-  find(/* data */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  find(data) {//throw new NotImplementedError('Not implemented');
+    function findWithin(node, value) {
+      if (!node) 
+        return null;
+
+      if (node.data === value) 
+        return node;
+
+      if (node.data < value) {
+        return findWithin(node.right, value);
+      } 
+      else {
+        return findWithin(node.left, value);
+      }
+    }
+    return findWithin(this.rootElem, data);
   }
 
   remove(data) {//throw new NotImplementedError('Not implemented');
@@ -69,11 +74,11 @@ class BinarySearchTree {
       if(!node) 
         return null;
 
-      if(value < node.value) {
+      if(value < node.data) {
         node.left = removeNode(node.left, value);
         return node;
       } 
-      else if(value > node.value) {
+      else if(value > node.data) {
         node.right = removeNode(node.right, value);
         return node;
       } 
@@ -96,36 +101,36 @@ class BinarySearchTree {
           minFromRight = minFromRight.left;
         }
 
-        node.value = minFromRight.value;
+        node.data = minFromRight.value;
         node.right = removeNode(node.right, minFromRight.value);
 
         return node;
       }
     }
 
-    this.root = removeNode(this.root, data);
+    this.rootElem = removeNode(this.rootElem, data);
   }
 
   min() {//throw new NotImplementedError('Not implemented');
-    if(!this.root)
+    if(!this.rootElem)
       return null;
     
-    let minNode = this.root;
-    while(minNode.left)
-      minNode = node.left;
+    let node = this.rootElem;
+    while(node.left)
+      node = node.left;
     
-    return minNode.value;
+    return node.data;
   }
 
   max() {//throw new NotImplementedError('Not implemented');
-    if(!this.root)
+    if(!this.rootElem)
       return null;
 
-    let maxNode = this.root;
-    while(maxNode.right)
-      maxNode = maxNode.right;
+    let node = this.rootElem;
+    while(node.right)
+      node = node.right;
     
-    return maxNode.value;
+    return node.data;
   }
 }
 
