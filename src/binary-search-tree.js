@@ -26,20 +26,16 @@ class BinarySearchTree {
 
   add(data) {//throw new NotImplementedError('Not implemented');
     function addWithin(node, value) {
-      if (!node) {
+      if(!node)
         return new Node(value);
-      }
 
-      if (node.value === value) {
+      if(node.value === value)
         return node;
-      }
       
-      if (value < node.value) {
+      if(value < node.value) 
         node.left = addWithin(node.left, value);
-      } 
-      else {
+      else
         node.right = addWithin(node.right, value);
-      }
       
       return node;
     }
@@ -49,10 +45,10 @@ class BinarySearchTree {
 
   has(data) {//throw new NotImplementedError('Not implemented');
     function searchWithin(node, value) {
-      if (!node) 
+      if(!node) 
         return false;
 
-      if (node.data === value) 
+      if(node.data === value) 
         return true;
 
       return value < node.data ?
@@ -70,33 +66,33 @@ class BinarySearchTree {
 
   remove(data) {//throw new NotImplementedError('Not implemented');
     function removeNode(node, value) {
-      if (!node) 
+      if(!node) 
         return null;
 
-      if (value < node.value) {
+      if(value < node.value) {
         node.left = removeNode(node.left, value);
         return node;
       } 
-      else if (value > node.value) {
+      else if(value > node.value) {
         node.right = removeNode(node.right, value);
         return node;
       } 
       else {
-        if (!node.left && !node.right) 
+        if(!node.left && !node.right) 
           return null;
 
-        if (!node.left) {
+        if(!node.left) {
           node = node.right;
           return node;
         }
 
-        if (!node.right) {
+        if(!node.right) {
           node = node.left;
           return node;
         }
 
         let minFromRight = node.right;
-        while (minFromRight.left) {
+        while(minFromRight.left) {
           minFromRight = minFromRight.left;
         }
 
@@ -110,14 +106,26 @@ class BinarySearchTree {
     this.root = removeNode(this.root, data);
   }
 
-  min() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  min() {//throw new NotImplementedError('Not implemented');
+    if(!this.root)
+      return null;
+    
+    let minNode = this.root;
+    while(minNode.left)
+      minNode = node.left;
+    
+    return minNode.value;
   }
 
-  max() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  max() {//throw new NotImplementedError('Not implemented');
+    if(!this.root)
+      return null;
+
+    let maxNode = this.root;
+    while(maxNode.right)
+      maxNode = maxNode.right;
+    
+    return maxNode.value;
   }
 }
 
