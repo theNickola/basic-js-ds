@@ -24,14 +24,31 @@ class BinarySearchTree {
     return this.root;
   }
 
-  add(/* data */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  add(data) {//throw new NotImplementedError('Not implemented');
+    function addWithin(node, value) {
+      if (!node) {
+        return new Node(value);
+      }
+
+      if (node.value === value) {
+        return node;
+      }
+      
+      if (value < node.value) {
+        node.left = addWithin(node.left, value);
+      } 
+      else {
+        node.right = addWithin(node.right, value);
+      }
+      
+      return node;
+    }
+
+    this.root = addWithin(this.root, data);
   }
 
-  has(/* data */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  has(data) {//throw new NotImplementedError('Not implemented');
+    
   }
 
   find(/* data */) {
