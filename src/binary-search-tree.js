@@ -43,9 +43,7 @@ class BinarySearchTree {
       if(node.data === value) 
         return true;
 
-      return value < node.data ?
-        searchWithin(node.left, value):
-        searchWithin(node.right, value);
+      return value < node.data ? searchWithin(node.left, value) : searchWithin(node.right, value);
     }
 
     return searchWithin(this.rootElem, data);
@@ -101,8 +99,8 @@ class BinarySearchTree {
           minFromRight = minFromRight.left;
         }
 
-        node.data = minFromRight.value;
-        node.right = removeNode(node.right, minFromRight.value);
+        node.data = minFromRight.data;
+        node.right = removeNode(node.right, minFromRight.data);
 
         return node;
       }
